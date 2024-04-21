@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+    <div id="targetDiv" style="width: 1200px; height: 120px;">
+        <h2 style="color: yellow;">Tsi is iphone</h2>
+    </div>
+    <button id="exportBtn">doenload</button>
+    
+    <script>
+        document.getElementById('exportBtn').addEventListener('click', function() {
+            html2canvas(document.getElementById('targetDiv'), {
+                onrendered: function(canvas) {
+                    var img = canvas.toDataURL('image/png');
+
+                    
+                    var link = document.createElement('a');
+                    link.href = img;
+                    link.download = 'myImage.png';
+                    
+                    
+                    var event = new MouseEvent('click', {
+                        view: window,
+                        bubbles: true,
+                        cancelable: true
+                    });
+                    link.dispatchEvent(event);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

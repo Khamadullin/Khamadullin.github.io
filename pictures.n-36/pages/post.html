@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/assets/CSS/font.css">
+    <link rel="stylesheet" href="/assets/CSS/post.css">
+    <link rel="stylesheet" href="/assets/CSS/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="/assets/JS/download.js"></script>
+    <script src="/assets/JS/post.js"></script>
+</head>
+<body>
+    <div class="main">
+        <div  id="targetDiv" >
+            <div class="picture-cover" id="imgDiv" style="background-image: url(/assets/img/back.jpg);">
+                <img src="/assets/img/back2.jpg" id="source" alt="" style="position: absolute;
+                z-index: 1;
+            
+                
+                background-size: cover;
+                background-position: center;
+            
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;">
+                <img src="" id="cover" alt="" style="position: absolute;
+                z-index: 2;
+            
+                
+                background-size: cover;
+                background-position: center;
+            
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;">
+
+                <div class="frame">
+                    <div id="text-box">
+                       
+                            <span class="highlight-text"  >
+                                <span id="text1">Заголовок</span>
+                                <span id="text2"></span>
+                                <span id="text3"></span>
+                                <span id="text4"></span>
+                                <span id="text5"></span>
+                        
+                            </span> 
+                            
+                        
+                    </div>
+                </div>
+
+                    
+
+                </div>
+            </div> 
+        </div>
+    </div>
+
+    <div class="warning">
+        <b>Не допускайте переноса целой плашки на следующую строку!!!</b> Разделите её на две разные плашки, а обычный текст между ними оставьте пустым
+    </div><br>
+    <a style="font-size: 40px; font-family: 'Golos-text-bold', sans-serif;" href="https://youtu.be/5X2i1okVi6E">Обучение</a><br>
+    
+
+    <input type="file" id="fileInput" accept="image/*" class="input-file">
+    <button id="btnUpload" class="button file">Замена бэкграунда</button><br><br>
+    <script>
+        document.getElementById("btnUpload").addEventListener("click", function() {
+        document.getElementById("fileInput").click();
+        });
+
+        document.getElementById("fileInput").addEventListener("change", function() {
+        var file = this.files[0];
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById("source").src = e.target.result;
+        }
+        reader.readAsDataURL(file);
+});
+    </script>
+
+
+   
+    <label for="select-cover" style="font-size: 25px;">Выбор рамки:</label>
+        <select id="select-cover" class="input-section">
+            <option>———</option>
+            <option value="/assets/img/post-cover/main.png" data-color="#1941FF">Синяя</option>
+            <option value="/assets/img/post-cover/black.png" data-color="#1d1d1d">Черная</option>
+            <option value="/assets/img/post-cover/red.png" data-color="#ff1940">Красная</option>
+            
+        </select>
+    </form> <br>
+    
+    
+        
+    <input type="text" id="input-text1" class="input-text" placeholder="Без плашки">
+    <button onclick="newText1()" class="button replace" >Заменить текст</button>
+    <br>
+     
+    <input type="text" id="input-text2" class="input-text" placeholder="В плашке">
+    <button onclick="newText2()" class="button replace">Заменить текст</button>
+    <br>
+
+    <input type="text" id="input-text3" class="input-text" placeholder="Без плашки">
+    <button onclick="newText3()" class="button replace" >Заменить текст</button>
+    <br>
+     
+    <input type="text" id="input-text4" class="input-text" placeholder="В плашке">
+    <button onclick="newText4()" class="button replace">Заменить текст</button>
+    <br>
+
+    <input type="text" id="input-text5" class="input-text" placeholder="Без плашки">
+    <button onclick="newText5()" class="button replace">Заменить текст</button>
+    <br>
+
+    
+    
+    
+
+    <button id="exportBtn" class="button download">Скачать картинку</button>
+    
+    
+
+    <script>
+        document.getElementById('exportBtn').addEventListener('click', function() {
+    html2canvas(document.getElementById('targetDiv'), {
+        onrendered: function(canvas) {
+            var img = canvas.toDataURL('image/png');
+
+            
+            var link = document.createElement('a');
+            link.href = img;
+            link.download = 'myImage.png';
+            
+            
+            var event = new MouseEvent('click', {
+                view: window,
+                bubbles: true,
+                cancelable: true
+            });
+            link.dispatchEvent(event);
+        }
+    });
+});
+    </script>
+<script>
+        document.getElementById("select-cover").addEventListener("change", function() {
+    var selectedColor = this.options[this.selectedIndex].getAttribute("data-color");
+    document.getElementById("text2").style.backgroundColor = selectedColor;
+    document.getElementById("text4").style.backgroundColor = selectedColor;
+  });
+
+
+    </script>
+
+</body>
+</html>

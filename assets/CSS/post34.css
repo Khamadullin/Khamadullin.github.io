@@ -1,0 +1,98 @@
+.main {
+    width: 900px;
+    height: auto;
+    background-color: antiquewhite;
+    /* float: left; */
+    margin-right: 20px;
+}
+
+.picture-cover {
+    /* background-image: url(/assets/img/back.jpg); */
+    width: 900px;
+    height: 1200px;
+    background-size: cover; /* чтобы картинка полностью заполняла div */
+  background-position: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* #source {
+    
+} */
+
+.frame {
+    
+    width: 900px;
+    height: 1200px;
+    z-index: 2;
+    position: relative;
+    font-family: 'Golos-text-bold', sans-serif;
+    color: white;
+    /* font-size: 80px; */
+}
+
+#text-box {
+    width: 700px;
+    height: 200px;
+    margin-top: 920px;
+    margin-left: 100px;
+    
+    position: relative;
+    vertical-align: bottom;
+    
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    
+}
+
+#highlight-text {
+    color: white;
+    font-weight: bold;
+    /* background-color: #FFD700;  */
+    padding: 3px 20px;
+    margin-right: 10px; /* добавляем отступ справа */
+    font-size: 70px;
+}
+
+#subtitle-text {
+    align-self: flex-end;
+    flex: 1; /* задаем гибкую ширину для авто-размещения (flexbox) */
+}
+
+.checkbox {
+    width: 20px;
+    height: 20px;
+    margin-top: 20px;
+    
+}
+
+.new-color {
+    position: relative;
+}
+
+#plaha-top {
+    position: absolute;
+    height: 70px;
+    /* width: 800px; */
+    background-color: blue;
+    z-index: -1;
+    top: 27px;
+    left: 20px;
+    display: block;
+}
+#plaha-bottom {
+    position: absolute;
+    height: 70px;
+    /* width: 1500px; */
+    background-color: blue;
+    z-index: -1;
+    top: 123px;
+    left: 20px;
+    display: block;
+}
+
+/* #text2, #text4 {
+    background-color: #1941FF;
+}
+ */

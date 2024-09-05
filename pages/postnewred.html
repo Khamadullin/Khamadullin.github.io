@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/assets/CSS/font.css">
+    <link rel="stylesheet" href="/assets/CSS/postnew.css">
+    <link rel="stylesheet" href="/assets/CSS/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="/assets/JS/download.js"></script>
+    <script src="/assets/JS/postnew.js"></script>
+</head>
+<body>
+    <div class="main">
+        <div  id="targetDiv" >
+            <div class="picture-cover" id="imgDiv" style="background-image: url(/assets/img/back.jpg);">
+                <img src="/assets/img/back2.jpg" id="source" alt="" style="position: absolute;
+                z-index: 1;
+            
+                
+                background-size: cover;
+                background-position: center;
+            
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;">
+
+                <!-- верх -->
+                <img src="/assets/img/post-cover/darkup.png" id="darkup" alt="" style="position: absolute;
+                z-index: 2;
+
+
+                background-size: cover;
+                background-position: center;
+                
+                display: none;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;">
+
+                <!-- низ -->
+                <img src="/assets/img/post-cover/reddown.png" id="darkdown" alt="" style="position: absolute;
+                z-index: 2;
+            
+                
+                background-size: cover;
+                background-position: center;
+                
+                display: none;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;">
+
+                <!-- лого -->
+                <img src="" id="cover" alt="" style="position: absolute;
+                z-index: 3;
+            
+                
+                background-size: cover;
+                background-position: center;
+                
+                
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;">
+
+                
+
+                <div class="frame">
+                    <div id="text-box">
+                       
+                            <span id="highlight-text"  >
+                                <div id="tag-cont" class="text-white" >
+                                    
+                                </div>
+                                <span id="text1" class="text text-white">картинки только форматом </span>
+                                <span id="text2" class="text text-color-red" >1х1.</span>
+                                <span id="text3" class="text text-white">допускается</span>
+                                <span id="text4" class="text text-color-red" >до 4 строк.</span>
+                                <span id="text5" class="text text-white">положение лого - центр сверху, но иногда можно в других местах</span>
+                        
+                            </span> 
+                            
+                        
+                    </div>
+                </div>
+
+                    
+
+                </div>
+            </div> 
+        </div>
+    </div>
+
+    
+    
+    
+
+    <input type="file" id="fileInput" accept="image/*" class="input-file">
+    <button id="btnUpload" class="button file">Замена бэкграунда</button><br><br>
+    <script>
+        document.getElementById("btnUpload").addEventListener("click", function() {
+        document.getElementById("fileInput").click();
+        });
+
+        document.getElementById("fileInput").addEventListener("change", function() {
+        var file = this.files[0];
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById("source").src = e.target.result;
+        }
+        reader.readAsDataURL(file);
+});
+    </script>
+
+
+   
+    <label for="select-cover" style="font-size: 25px;">Положение лого:</label>
+        <select id="select-cover" class="input-section">
+            <option>———</option>
+            <option value="/assets/img/post-cover/ul.png">Лого верх лево</option>
+            <option value="/assets/img/post-cover/uc.png">Лого верх центр</option>
+            <option value="/assets/img/post-cover/ur.png">Лого верх право</option>
+            <option value="/assets/img/post-cover/dl.png">Лого низ лево</option>
+            <option value="/assets/img/post-cover/dc.png">Лого низ центр</option>
+            <option value="/assets/img/post-cover/dr.png">Лого низ право</option>
+            
+        </select>
+    </form> <br>
+    <br>
+    
+
+    <!-- добавление тегов -->
+    <div>
+        <input type="text" id="tag-input" class="input-text" placeholder="Введите текст тега">
+        <button id="add-tag-btn" class="button" >Добавить тег</button>
+        <script>
+            document.getElementById('add-tag-btn').addEventListener('click', function() {
+            const tagInput = document.getElementById('tag-input');
+            const tagText = tagInput.value.trim(); // Получение текста из поля ввода
+
+            if (tagText) { // Проверка на пустую строку
+                const tagCont = document.getElementById('tag-cont');
+
+                // Создание нового div с классом "tag" и текстом из поля ввода
+                const newTag = document.createElement('div');
+                newTag.className = 'tag-red';
+                newTag.textContent = tagText;
+
+                // Добавление нового тега в контейнер
+                tagCont.appendChild(newTag);
+
+                // Очистка поля ввода
+                tagInput.value = '';
+            }
+        });
+        </script>
+    </div>
+
+    <!-- удаление тегов -->
+    <div>
+        <button id="remove-tag-btn" class="button">Удалить последний тег</button>
+        <script>
+            document.getElementById('remove-tag-btn').addEventListener('click', function() {
+            const tagCont = document.getElementById('tag-cont');
+            const tags = tagCont.getElementsByClassName('tag-red');
+
+            if (tags.length > 0) { // Проверка на наличие тегов
+                tagCont.removeChild(tags[tags.length - 1]); // Удаляет последний тег
+            }
+        });
+        </script>
+    </div>
+    
+
+
+    <!-- переключатели затемнения  -->
+    <label style="font-size: 25px; margin-top: 20px;">
+        <input type="radio" name="imageSelect" value="showFirst" onclick="updateImages()"> Затемнение сверху
+    </label><br>
+    <label style="font-size: 25px; margin-top: 20px;">
+        <input type="radio" name="imageSelect" value="showSecond" onclick="updateImages()"> Оранжевый снизу
+    </label><br>
+    <label style="font-size: 25px; margin-top: 20px;">
+        <input type="radio" name="imageSelect" value="hideAll" onclick="updateImages()"> Без затемнений
+    </label><br>
+    
+        
+    <input type="text" id="input-text1" class="input-text" placeholder="Белый">
+    <button onclick="newText1()" class="button replace" >Заменить текст</button>
+    <br>
+     
+    <input type="text" id="input-text2" class="input-text" placeholder="Синий">
+    <button onclick="newText2()" class="button replace">Заменить текст</button>
+    <br>
+
+    <input type="text" id="input-text3" class="input-text" placeholder="Белый">
+    <button onclick="newText3()" class="button replace" >Заменить текст</button>
+    <br>
+     
+    <input type="text" id="input-text4" class="input-text" placeholder="Синий">
+    <button onclick="newText4()" class="button replace">Заменить текст</button>
+    <br>
+
+    <input type="text" id="input-text5" class="input-text" placeholder="Белый">
+    <button onclick="newText5()" class="button replace">Заменить текст</button>
+    <br>
+
+    
+    
+    
+
+    <button id="exportBtn" class="button download">Скачать картинку</button>
+    
+    
+
+    <script>
+        document.getElementById('exportBtn').addEventListener('click', function() {
+    html2canvas(document.getElementById('targetDiv'), {
+        onrendered: function(canvas) {
+            var img = canvas.toDataURL('image/png');
+
+            
+            var link = document.createElement('a');
+            link.href = img;
+            link.download = 'myImage.png';
+            
+            
+            var event = new MouseEvent('click', {
+                view: window,
+                bubbles: true,
+                cancelable: true
+            });
+            link.dispatchEvent(event);
+        }
+    });
+});
+    </script>
+<script>
+        document.getElementById("select-cover").addEventListener("change", function() {
+    var selectedColor = this.options[this.selectedIndex].getAttribute("data-color");
+    document.getElementById("text2").style.backgroundColor = selectedColor;
+    document.getElementById("text4").style.backgroundColor = selectedColor;
+  });
+
+
+    </script>
+
+</body>
+</html>
+
